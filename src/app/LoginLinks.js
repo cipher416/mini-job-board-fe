@@ -21,14 +21,14 @@ const LoginLinks = () => {
                         href="/login"
                         className="text-sm text-gray-700 underline"
                     >
-                        Login
+                        Login as Company
                     </Link>
 
                     <Link
                         href="/register"
                         className="ml-4 text-sm text-gray-700 underline"
                     >
-                        Register
+                        Register as Company
                     </Link>
                 </>
             )}
