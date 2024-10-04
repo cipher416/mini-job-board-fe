@@ -1,27 +1,27 @@
-'use client';
-import { useState } from 'react';
-import LoginLinks from '@/app/LoginLinks';
+'use client'
+import { useState } from 'react'
+import LoginLinks from '@/app/LoginLinks'
 import axios from '@/lib/axios'
 
 
 const Home = () => {
-    const [title, setTitle] = useState('');
-    const [location, setLocation] = useState('');
-    const [results, setResults] = useState([]);
+    const [title, setTitle] = useState('')
+    const [location, setLocation] = useState('')
+    const [results, setResults] = useState([])
 
     const handleSearch = async (e) => {
-        e.preventDefault();
-        const apiUrl = `/api/positions/search?job_title=${encodeURIComponent(title)}&location=${encodeURIComponent(location)}`;
+        e.preventDefault()
+        const apiUrl = `/api/positions/search?job_title=${encodeURIComponent(title)}&location=${encodeURIComponent(location)}`
 
         try {
-            const response = await axios.get(apiUrl);
-            const data = response.data;
-            setResults(data); // Assuming the API returns an array of job objects
+            const response = await axios.get(apiUrl)
+            const data = response.data
+            setResults(data) // Assuming the API returns an array of job objects
         } catch (error) {
-            console.error('Error fetching jobs:', error);
-            setResults([]); // Clear results on error
+            console.error('Error fetching jobs:', error)
+            setResults([]) // Clear results on error
         }
-    };
+    }
 
     return (
         <>
@@ -56,7 +56,7 @@ const Home = () => {
                 </div>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home

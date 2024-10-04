@@ -1,62 +1,62 @@
-'use client';
-import { useEffect, useState } from 'react';
-;
-import Header from '@/app/(app)/Header';
+'use client'
+import { useEffect, useState } from 'react'
+
+import Header from '@/app/(app)/Header'
 import axios from '@/lib/axios'
 
 
 const Dashboard = () => {
-    const [positions, setPositions] = useState([]);
-    const [formData, setFormData] = useState({ job_title: '', location: '', job_type: '' });
-    const [editingId, setEditingId] = useState(null);
+    const [positions, setPositions] = useState([])
+    const [formData, setFormData] = useState({ job_title: '', location: '', job_type: '' })
+    const [editingId, setEditingId] = useState(null)
 
     useEffect(() => {
-        fetchPositions();
-    }, []);
+        fetchPositions()
+    }, [])
 
     const fetchPositions = async () => {
         try {
-            const response = await axios.get('/api/positions');
-            setPositions(response.data);
+            const response = await axios.get('/api/positions')
+            setPositions(response.data)
         } catch (error) {
-            console.error('Error fetching positions:', error);
+            console.error('Error fetching positions:', error)
         }
-    };
+    }
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
+    }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         try {
             if (editingId) {
-                await axios.put(`/api/positions/${editingId}`, formData);
+                await axios.put(`/api/positions/${editingId}`, formData)
             } else {
-                await axios.post('/api/positions', formData);
+                await axios.post('/api/positions', formData)
             }
-            setFormData({ job_title: '', location: '', job_type: '' });
-            setEditingId(null);
-            fetchPositions();
+            setFormData({ job_title: '', location: '', job_type: '' })
+            setEditingId(null)
+            fetchPositions()
         } catch (error) {
-            console.error('Error saving position:', error);
+            console.error('Error saving position:', error)
         }
-    };
+    }
 
     const handleEdit = (position) => {
-        setFormData(position);
-        setEditingId(position.id);
-    };
+        setFormData(position)
+        setEditingId(position.id)
+    }
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`/api/positions/${id}`);
-            fetchPositions();
+            await axios.delete(`/api/positions/${id}`)
+            fetchPositions()
         } catch (error) {
-            console.error('Error deleting position:', error);
+            console.error('Error deleting position:', error)
         }
-    };
+    }
 
     return (
         <>
@@ -120,7 +120,7 @@ const Dashboard = () => {
                 </div>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default Dashboard;
+export default Dashboard
